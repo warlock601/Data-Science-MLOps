@@ -127,3 +127,21 @@ After this we can commit & push the entire file structure.
   logger.info("Welcome to our custom logging data science")
   ```
   Then when we run main.py, we get something like this: "  [2025-12-17 14:35:29,543: INFO: main: Welcome to our custom logging data science:]  "
+
+- Explanation for ensure_annotations function which is inside utils/common.py. ensure_annotations: It is a decorator whose sole purpose is to enforce runtime type checking based on function annotations (like whatever datatype is expected, only that should be passed.)
+    ```bash
+    # example of ensure_annotations usage
+    @ensure_annotations
+    def save_json(path: Path, data: dict):
+      """save json data
+
+      Args:
+        path (Path): path to json file
+        data (dict): data to be saved in json file
+      """
+      with open(path, "w") as f:
+        json.dump(data, f, indent=4)
+
+      logger.info(f"json file saved at: {path}")
+    ```
+    
