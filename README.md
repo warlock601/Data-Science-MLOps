@@ -74,4 +74,23 @@ list_of_files=[
 
 ]
 ```
+We'll create a for loop in which every file we're gonna split it into file-name along with file-path. We'll use a condition that if the file directory is not empty, then we make direcotry using "os.makedirs()" (this works in both Mac or Linux irrespective of the OS). Another condition will be used to check if the filepath does not exist, then we'll open that specific filepath in the write mode and then we're going to create the file. And as soon as we run template.py, entire project structure will be created.
+```bash
+for filepath in list_of_files:
+    filepath=Path(filepath)
+    filedir, filename=os.path.split(filepath)
 
+    if filedir!="":
+        os.makedirs(filedir,exist_ok=True)
+        logging.info(f"Creating directory {filedir} for the file : {filename}")
+
+    if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
+        with open(filepath,"w") as f:
+
+            pass
+            logging.info(f"Creating empty file: {filepath}")
+
+    else:
+        logging.info(f"{filename} already exists")
+```
+After this we can commit & push the entire file structure.
