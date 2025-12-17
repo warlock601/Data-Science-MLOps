@@ -94,3 +94,36 @@ for filepath in list_of_files:
         logging.info(f"{filename} already exists")
 ```
 After this we can commit & push the entire file structure.
+
+- setup.py is used if we want to create our entire project as a package. And then we can put it into the pipeline.
+- We'll put this code in src/DataScienceMLops/__init__.py file
+  ```bash
+  import os
+  import sys
+  import logging
+
+  logging_str="[%(asctime)s: %(levelname)s: %(module)s: %(message)s:]"
+
+  log_dir="logs"
+  log_filepath=os.path.join(log_dir,"logging.log")
+  os.makedirs(log_dir,exist_ok=True)
+
+  logging.basicConfig(
+    level=logging.INFO,
+    format=logging_str,
+
+    handlers=[
+        logging.FileHandler(log_filepath), 
+        logging.StreamHandler(sys.stdout)
+    ]
+  )
+
+  logger=logging.getLogger("datasciencelogger")
+  ```
+  And this code in main.py:
+  ```bash
+  from src.DataScienceMLops import logger
+
+  logger.info("Welcome to our custom logging data science")
+  ```
+  Then when we run main.py, we get something like this: "  [2025-12-17 14:35:29,543: INFO: main: Welcome to our custom logging data science:]  "
