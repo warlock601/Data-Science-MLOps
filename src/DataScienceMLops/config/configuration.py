@@ -1,7 +1,7 @@
-from src.datascience.constants import *
-from src.datascience.utils.common import read_yaml, create_directories
+from src.DataScienceMLops.constants import *
+from src.DataScienceMLops.utils.common import read_yaml, create_directories
 
-from src.datascience.entity.config_entity import (DataIngestionConfig,DataValidationConfig,
+from src.DataScienceMLops.entity.config_entity import (DataIngestionConfig,DataValidationConfig,
                                                   DataTransformationConfig,ModelTrainerConfig,
                                                   ModelEvaluationConfig)
 
