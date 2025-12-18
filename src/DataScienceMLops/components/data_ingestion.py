@@ -1,8 +1,8 @@
 import os
 import urllib.request as request
-from src.datascience import logger
+from src.DataScienceMLops import logger
 import zipfile
-from src.datascience.entity.config_entity import (DataIngestionConfig)
+from src.DataScienceMLops.entity.config_entity import (DataIngestionConfig)
 
 
 ## component-Data Ingestion
