@@ -145,3 +145,19 @@ After this we can commit & push the entire file structure.
       logger.info(f"json file saved at: {path}")
     ```
     
+- Workflow for ML Pipeline: We'll see how we can design each and every specific modeule.
+  1. __Data Ingestion__ First we import the modules like "os" module which is used to interact with the Operating System like if we want to change directory etc. Then we will add the configurations for Data Ingestion step in config.yaml This config needs to be passed to Data Ingestion pipeline like        root_dir, source_dir, local_data_file, unzip_dir etc.  </br>
+     Inside src/DataScienceMLops/constants/init.py, we will define the config, params & schema path. Everything will be defined in the form of constants. This then will be called in ConfigurationManager class in init function. Before we're defining the ConfigurationManager function, above it we will need to Import      these constants using  </br>
+     ```bash
+     from src.DataScienceMLops.constants import *
+     from src.DataScienceMLops.utils.common import read_yaml, create_directories
+     ```
+     __Steps for Data Ingestion:__ </br>
+     Update config.yaml : config.yaml consists of configurations that we require. </br>
+     Update schema.yaml : schema.yaml is used both in data ingestion & validation. In data Validation, we check the schema of the input we're getting. </br>
+     Update params.yaml : For parameters </br>
+     Update the entity </br>
+     Update the configuration manager in src config: Whenever the configuration manager is loaded, whatever is there in config, schema & params.yaml, it should be loaded.  </br>
+     Update the components </br>
+     Update the pipeline </br>
+     Update the main.py </br>
