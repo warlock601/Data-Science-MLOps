@@ -168,3 +168,7 @@ After this we can commit & push the entire file structure.
       unzip_dir: artifacts/data_ingestion/winequality-red.csv
       STATUS_FILE: artifacts/data_validation/status.txt
      ```
+     All the features will be added to schema.yml with the help of pandas-read so that they can be validated. </br>
+     </br>
+     In data Validation, we'll also check if there are any NULL values or not. Then we will provide root_dir, STATUS_FILE, unzip_data_dir, all_schema to our data validation component. Almost all the steps will be same as that of Data-Ingestion, here we will write get_data_validation_config()
+   
