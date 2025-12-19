@@ -161,3 +161,10 @@ After this we can commit & push the entire file structure.
      Update the components </br>
      Update the pipeline </br>
      Update the main.py </br>
+  2. Data Validation: We'll validate each and every feature that we have and alongwith that we'll use those yaml files that we have specifically defined. Inside Artifacts folder, just like data_ingestion, we'll create out data_validation folder. Then we'll have the unzipped data directory, this will       be the input so that we'll be able to compare all the features from this dataset and this particular input is available in data ingestion. Then there will be status_file in which we'll update the status whether the validation is True or False. All this will be added in config.yml alongwith            data_ingestion & other stages.
+     ```bash
+     data_validation:
+      root_dir: artifacts/data_validation
+      unzip_dir: artifacts/data_ingestion/winequality-red.csv
+      STATUS_FILE: artifacts/data_validation/status.txt
+     ```
