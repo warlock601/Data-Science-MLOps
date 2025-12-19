@@ -152,7 +152,9 @@ After this we can commit & push the entire file structure.
      from src.DataScienceMLops.constants import *
      from src.DataScienceMLops.utils.common import read_yaml, create_directories
      ```
+     </br>
      __Steps for Data Ingestion:__ </br>
+     
      Update config.yaml : config.yaml consists of configurations that we require. </br>
      Update schema.yaml : schema.yaml is used both in data ingestion & validation. In data Validation, we check the schema of the input we're getting. </br>
      Update params.yaml : For parameters </br>
@@ -161,7 +163,10 @@ After this we can commit & push the entire file structure.
      Update the components </br>
      Update the pipeline </br>
      Update the main.py </br>
-  2. Data Validation: We'll validate each and every feature that we have and alongwith that we'll use those yaml files that we have specifically defined. Inside Artifacts folder, just like data_ingestion, we'll create out data_validation folder. Then we'll have the unzipped data directory, this will       be the input so that we'll be able to compare all the features from this dataset and this particular input is available in data ingestion. Then there will be status_file in which we'll update the status whether the validation is True or False. All this will be added in config.yml alongwith            data_ingestion & other stages.
+    
+     </br>
+     </br>
+  3. Data Validation: We'll validate each and every feature that we have and alongwith that we'll use those yaml files that we have specifically defined. Inside Artifacts folder, just like data_ingestion, we'll create out data_validation folder. Then we'll have the unzipped data directory, this will       be the input so that we'll be able to compare all the features from this dataset and this particular input is available in data ingestion. Then there will be status_file in which we'll update the status whether the validation is True or False. All this will be added in config.yml alongwith            data_ingestion & other stages.
      ```bash
      data_validation:
       root_dir: artifacts/data_validation
@@ -170,5 +175,17 @@ After this we can commit & push the entire file structure.
      ```
      All the features will be added to schema.yml with the help of pandas-read so that they can be validated. </br>
      </br>
-     In data Validation, we'll also check if there are any NULL values or not. Then we will provide root_dir, STATUS_FILE, unzip_data_dir, all_schema to our data validation component. Almost all the steps will be same as that of Data-Ingestion, here we will write get_data_validation_config()
+     In data Validation, we'll also check if there are any NULL values or not. Then we will provide root_dir, STATUS_FILE, unzip_data_dir, all_schema to our data validation component. Almost all the steps will be same as      that of Data-Ingestion, here we will write get_data_validation_config(). </br>
+     Again we'll follow the same order to update the files (that we created using project-structure script) that we did for data-ingestion.  </br>
+     </br>
+     Update config.yaml : config.yaml consists of configurations that we require. </br>
+     Update schema.yaml : schema.yaml is used both in data ingestion & validation. In data Validation, we check the schema of the input we're getting. </br>
+     Update params.yaml : For parameters </br>
+     Update the entity </br>
+     Update the configuration manager in src config: Whenever the configuration manager is loaded, whatever is there in config, schema & params.yaml, it should be loaded.  </br>
+     Update the components </br>
+     Update the pipeline </br>
+     Update the main.py </br>
    
+     </br>
+     </br>
