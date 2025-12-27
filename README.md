@@ -155,15 +155,15 @@ After this we can commit & push the entire file structure.
      </br>
      __Steps for Data Ingestion:__ </br>
      
-     Update config.yaml : config.yaml consists of configurations that we require. </br>
-     Update schema.yaml : schema.yaml is used both in data ingestion & validation. In data Validation, we check the schema of the input we're getting. </br>
-     Update params.yaml : For parameters </br>
-     Update the entity </br>
-     Update the configuration manager in src config: Whenever the configuration manager is loaded, whatever is there in config, schema & params.yaml, it should be loaded.  </br>
-     Update the components </br>
-     Update the pipeline </br>
-     Update the main.py </br>
-    
+     </br>
+     - Update config.yaml : config.yaml consists of configurations that we require. </br>
+     - Update schema.yaml : schema.yaml is used both in data ingestion & validation. In data Validation, we check the schema of the input we're getting. </br>
+     - Update params.yaml : For parameters </br>
+     - Update the entity </br>
+     - Update the configuration manager in src config: Whenever the configuration manager is loaded, whatever is there in config, schema & params.yaml, it should be loaded.  </br>
+     - Update the components </br>
+     - Update the pipeline </br>
+     - Update the main.py </br>
      </br>
      </br>
   3. Data Validation: We'll validate each and every feature that we have and alongwith that we'll use those yaml files that we have specifically defined. Inside Artifacts folder, just like data_ingestion, we'll create out data_validation folder. Then we'll have the unzipped data directory, this will       be the input so that we'll be able to compare all the features from this dataset and this particular input is available in data ingestion. Then there will be status_file in which we'll update the status whether the validation is True or False. All this will be added in config.yml alongwith            data_ingestion & other stages.
@@ -175,17 +175,47 @@ After this we can commit & push the entire file structure.
      ```
      All the features will be added to schema.yml with the help of pandas-read so that they can be validated. </br>
      </br>
-     In data Validation, we'll also check if there are any NULL values or not. Then we will provide root_dir, STATUS_FILE, unzip_data_dir, all_schema to our data validation component. Almost all the steps will be same as      that of Data-Ingestion, here we will write get_data_validation_config(). </br>
+     In data Validation, we'll also check if there are any NULL values or not. If there are some NULL values then we can handle them using techniques like Mean Amputation orwe can replace categorical features by mode and all. Then we will provide root_dir, STATUS_FILE, unzip_data_dir, all_schema to        our data validation component. Almost all the steps will be same as that of Data-Ingestion, here we will write get_data_validation_config(). </br>
      Again we'll follow the same workflow for Data Validation (that we created using project-structure script) that we did for data-ingestion.  </br>
      </br>
-     Update config.yaml : config.yaml consists of configurations that we require. </br>
-     Update schema.yaml : schema.yaml is used both in data ingestion & validation. In data Validation, we check the schema of the input we're getting. </br>
-     Update params.yaml : For parameters </br>
-     Update the entity </br>
-     Update the configuration manager in src config: Whenever the configuration manager is loaded, whatever is there in config, schema & params.yaml, it should be loaded.  </br>
-     Update the components </br>
-     Update the pipeline </br>
-     Update the main.py </br>
-   
+     - Update config.yaml : config.yaml consists of configurations that we require. </br>
+     - Update schema.yaml : schema.yaml is used both in data ingestion & validation. In data Validation, we check the schema of the input we're getting. </br>
+     - Update params.yaml : For parameters </br>
+     - Update the entity </br>
+     - Update the configuration manager in src config: Whenever the configuration manager is loaded, whatever is there in config, schema & params.yaml, it should be loaded.  </br>
+     - Update the components </br>
+     - Update the pipeline </br>
+     - Update the main.py </br>
      </br>
      </br>
+     While defining the Data_validation task, after we read the data set, we need to compare with the schema (basically the features). If the feature name is equal, then we can proceed with setting the status to TURE. A Function is created called "validate_all_columns" which has return type as             Boolean. It will read the dataset then it will take all the columns in the form of a list. Then we will assign this all_schema and then we're going to take keys from there. Then we will compare all the columns to all the columns and setting the status to False if column not in all_schema. If it       is False, then we will open the STATUS_FILE in Write mode and update the validation_status to FALSE otherwise update it to TRUE.
+ ```bash
+  class DataValiadtion:
+    def __init__(self, config: DataValidationConfig):
+        self.config = config
+
+    def validate_all_columns(self)-> bool:
+        try:
+            validation_status = None
+
+            data = pd.read_csv(self.config.unzip_data_dir)
+            all_cols = list(data.columns)
+
+            all_schema = self.config.all_schema.keys()
+
+            
+            for col in all_cols:
+                if col not in all_schema:
+                    validation_status = False
+                    with open(self.config.STATUS_FILE, 'w') as f:
+                        f.write(f"Validation status: {validation_status}")
+                else:
+                    validation_status = True
+                    with open(self.config.STATUS_FILE, 'w') as f:
+                        f.write(f"Validation status: {validation_status}")
+
+            return validation_status
+        
+        except Exception as e:
+            raise e
+ ```
