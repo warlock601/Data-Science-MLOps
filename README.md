@@ -176,7 +176,7 @@ After this we can commit & push the entire file structure.
      All the features will be added to schema.yml with the help of pandas-read so that they can be validated. </br>
      </br>
      In data Validation, we'll also check if there are any NULL values or not. Then we will provide root_dir, STATUS_FILE, unzip_data_dir, all_schema to our data validation component. Almost all the steps will be same as      that of Data-Ingestion, here we will write get_data_validation_config(). </br>
-     Again we'll follow the same order to update the files (that we created using project-structure script) that we did for data-ingestion.  </br>
+     Again we'll follow the same workflow for Data Validation (that we created using project-structure script) that we did for data-ingestion.  </br>
      </br>
      Update config.yaml : config.yaml consists of configurations that we require. </br>
      Update schema.yaml : schema.yaml is used both in data ingestion & validation. In data Validation, we check the schema of the input we're getting. </br>
